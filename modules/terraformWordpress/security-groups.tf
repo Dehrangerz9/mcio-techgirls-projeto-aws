@@ -27,11 +27,14 @@ resource "aws_security_group" "wordpress_sg" {
 
   # Regra para permitir SSH (apenas para IPs específicos)
   ingress {
+    description = "SSH"
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = var.ssh_allowed_ips
+    cidr_blocks = ["x.x.x.x/x"] 
   }
+
+
 
   # Regra para permitir todo o tráfego de saída
   egress {
