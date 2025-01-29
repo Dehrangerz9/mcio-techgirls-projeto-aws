@@ -25,6 +25,15 @@ resource "aws_security_group" "public-whitelisted"{
         protocol    = "-1"
         to_port     = 0
     }
+
+      ingress {
+        description = "Grafana access"
+        from_port   = 3000
+        to_port     = 3000
+        protocol    = "tcp"
+        cidr_blocks = ["0.0.0.0/0"] # ou use um IP específico, caso prefira limitar o acesso
+    }
+
 }
 
 resource "aws_security_group" "private_rds_sg" {
@@ -40,3 +49,4 @@ resource "aws_security_group" "private_rds_sg" {
         security_groups = [aws_security_group.public-whitelisted.id]
     }
 }
+
